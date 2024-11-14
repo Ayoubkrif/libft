@@ -28,7 +28,29 @@ int	main(int a, char **c)
 {
 	ft_putnbr_fd();
 }
+void	ft_del(void *content)
+{
+	printf("%s\n", (char *)content);
+	ft_bzero(content,1 + ft_strlen((char *)content);
+}
+void	ft_printcontent(void *content)
+{
+	ft_putstr_fd((char *)content, 1);
+}
+
+void	*capitalize(void *content)
+{
+	int i = 0;
+	while (((char *)content)[i])
+	{
+		((char *)content)[i] = ft_toupper(((char *)content)[i]);
+		i++;
+	}
+	return (content);
+}
+
 /* faire ft_del a tout prix demainmatin*/
+
 int	main(int a, char **c)
 {
 	t_list	a;
@@ -43,7 +65,5 @@ int	main(int a, char **c)
 	ft_putnbr_fd(ft_lstsize(a));
 	ft_lstdelone(c);
 	b->next = NULL;
-	
 	ft_lstmap();
 }
-

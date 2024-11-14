@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:02:30 by ayoub             #+#    #+#             */
-/*   Updated: 2024/11/14 14:29:36 by aykrifa          ###   ########.fr       */
+/*   Created: 2024/11/02 15:43:33 by ayoub             #+#    #+#             */
+/*   Updated: 2024/11/02 15:43:46 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isisspace(int c)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	return ((c <= 13 && c >= 9) || c == ' ');
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	r;
-	int	s;
-	int	i;
+	size_t	i;
 
 	i = 0;
-	s = 1;
-	r = 0;
-	while (ft_isisspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	if (dest < src || dest > src + n)
 	{
-		if (nptr[i] == '-')
-			s = -s;
-		i++;
+		while (i < n)
+		{
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+			i++;
+		}
 	}
-	while (ft_isdigit(nptr[i]))
+	else
 	{
-		r = r * 10 + nptr[i] - '0';
-		i++;
+		while (n != 0)
+		{
+			n--;
+			((unsigned char *)dest)[n] = ((unsigned char *)src)[n];
+		}
 	}
-	return (s * r);
+	return (dest);
 }

@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:02:30 by ayoub             #+#    #+#             */
-/*   Updated: 2024/11/14 14:29:36 by aykrifa          ###   ########.fr       */
+/*   Created: 2024/10/29 23:39:16 by ayoub             #+#    #+#             */
+/*   Updated: 2024/10/31 10:34:42 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isisspace(int c)
+int	ft_isascii(int c)
 {
-	return ((c <= 13 && c >= 9) || c == ' ');
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
+/*
+#include<stdio.h>
 
-int	ft_atoi(const char *nptr)
+int	main(int a, char **c)
 {
-	int	r;
-	int	s;
-	int	i;
-
-	i = 0;
-	s = 1;
-	r = 0;
-	while (ft_isisspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			s = -s;
-		i++;
-	}
-	while (ft_isdigit(nptr[i]))
-	{
-		r = r * 10 + nptr[i] - '0';
-		i++;
-	}
-	return (s * r);
-}
+	(void)a;
+	while (*c[1])
+	printf("%d\n",ft_isascii(*c[1]++));
+}*/

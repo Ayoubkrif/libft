@@ -1,43 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:02:30 by ayoub             #+#    #+#             */
-/*   Updated: 2024/11/14 14:29:36 by aykrifa          ###   ########.fr       */
+/*   Created: 2024/11/02 14:43:37 by ayoub             #+#    #+#             */
+/*   Updated: 2024/11/14 07:38:50 by aykrifa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isisspace(int c)
+t_list	*ft_lstnew(void *content)
 {
-	return ((c <= 13 && c >= 9) || c == ' ');
-}
+	t_list	*newlst;
 
-int	ft_atoi(const char *nptr)
-{
-	int	r;
-	int	s;
-	int	i;
-
-	i = 0;
-	s = 1;
-	r = 0;
-	while (ft_isisspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			s = -s;
-		i++;
-	}
-	while (ft_isdigit(nptr[i]))
-	{
-		r = r * 10 + nptr[i] - '0';
-		i++;
-	}
-	return (s * r);
+	newlst = (t_list *)malloc(sizeof(t_list));
+	if (!newlst)
+		return (NULL);
+	newlst->next = NULL;
+	newlst->content = content;
+	return (newlst);
 }

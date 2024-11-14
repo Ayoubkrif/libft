@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:02:30 by ayoub             #+#    #+#             */
-/*   Updated: 2024/11/14 14:29:36 by aykrifa          ###   ########.fr       */
+/*   Created: 2024/11/02 14:42:53 by ayoub             #+#    #+#             */
+/*   Updated: 2024/11/02 15:55:39 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isisspace(int c)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	return ((c <= 13 && c >= 9) || c == ' ');
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	r;
-	int	s;
-	int	i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	s = 1;
-	r = 0;
-	while (ft_isisspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	if (little[0] == '\0')
+		return ((char *)big);
+	while (big[i] && i < len)
 	{
-		if (nptr[i] == '-')
-			s = -s;
+		j = 0;
+		while (i + j < len && big[i + j] && little[j]
+			&& big[i + j] == little[j])
+			j++;
+		if (big[i + j - 1] == little[j - 1] && little[j] == '\0')
+			return ((char *)&big[i]);
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		r = r * 10 + nptr[i] - '0';
-		i++;
-	}
-	return (s * r);
+	return (NULL);
 }

@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:02:30 by ayoub             #+#    #+#             */
-/*   Updated: 2024/11/14 14:29:36 by aykrifa          ###   ########.fr       */
+/*   Created: 2024/11/02 14:44:00 by ayoub             #+#    #+#             */
+/*   Updated: 2024/11/02 15:19:53 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isisspace(int c)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	return ((c <= 13 && c >= 9) || c == ' ');
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	r;
-	int	s;
-	int	i;
-
-	i = 0;
-	s = 1;
-	r = 0;
-	while (ft_isisspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	if (nb == -2147483648)
 	{
-		if (nptr[i] == '-')
-			s = -s;
-		i++;
+		write(fd, "-2147483648", 11);
+		return ;
 	}
-	while (ft_isdigit(nptr[i]))
+	if (nb < 0)
 	{
-		r = r * 10 + nptr[i] - '0';
-		i++;
+		nb = -nb;
+		ft_putchar_fd('-', fd);
 	}
-	return (s * r);
+	if (nb > 9)
+	{
+		ft_putnbr_fd((nb / 10), fd);
+	}
+	ft_putchar_fd("0123456789"[nb % 10], fd);
 }

@@ -1,43 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:02:30 by ayoub             #+#    #+#             */
-/*   Updated: 2024/11/14 14:29:36 by aykrifa          ###   ########.fr       */
+/*   Created: 2024/11/02 14:41:44 by ayoub             #+#    #+#             */
+/*   Updated: 2024/11/13 07:59:25 by aykrifa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isisspace(int c)
+static void	ft_join(char const *s1, char const *s2, char **r)
 {
-	return ((c <= 13 && c >= 9) || c == ' ');
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	r;
-	int	s;
 	int	i;
+	int	j;
 
 	i = 0;
-	s = 1;
-	r = 0;
-	while (ft_isisspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	j = 0;
+	while (s1[i])
 	{
-		if (nptr[i] == '-')
-			s = -s;
+		(*r)[i] = s1[i];
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
+	while (s2[j])
 	{
-		r = r * 10 + nptr[i] - '0';
-		i++;
+		(*r)[i + j] = s2[j];
+		j++;
 	}
-	return (s * r);
+	(*r)[i + j] = '\0';
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*r;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (s1[i])
+		i++;
+	while (s2[j])
+		j++;
+	r = (char *)malloc(sizeof(char) * (1 + i + j));
+	if (!r)
+		return (NULL);
+	ft_join(s1, s2, &r);
+	return (r);
 }

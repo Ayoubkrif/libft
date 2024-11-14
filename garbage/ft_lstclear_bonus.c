@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:02:30 by ayoub             #+#    #+#             */
-/*   Updated: 2024/11/14 14:29:36 by aykrifa          ###   ########.fr       */
+/*   Created: 2024/11/02 14:43:25 by ayoub             #+#    #+#             */
+/*   Updated: 2024/11/14 07:39:30 by aykrifa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isisspace(int c)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	return ((c <= 13 && c >= 9) || c == ' ');
-}
+	t_list	*current;
+	t_list	*temp;
 
-int	ft_atoi(const char *nptr)
-{
-	int	r;
-	int	s;
-	int	i;
-
-	i = 0;
-	s = 1;
-	r = 0;
-	while (ft_isisspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	current = *lst;
+	while (current)
 	{
-		if (nptr[i] == '-')
-			s = -s;
-		i++;
+		temp = current->next;
+		del(current->content);
+		free(current);
+		current = temp;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		r = r * 10 + nptr[i] - '0';
-		i++;
-	}
-	return (s * r);
+	*lst = NULL;
 }

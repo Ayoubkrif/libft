@@ -6,7 +6,7 @@
 /*   By: aykrifa <aykrifa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 08:12:36 by aykrifa           #+#    #+#             */
-/*   Updated: 2024/11/14 09:42:03 by aykrifa          ###   ########.fr       */
+/*   Updated: 2024/11/14 17:27:09 by aykrifa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,62 @@ int	main(int a, char **c)
 		printf("Real One   :%s\n", (char *)memmove((void *)s1, (void *)s2, (size_t)count));
 	}
 	Buffinit(0, c[2],c[3],&s1, &s2, NULL, NULL);
-	if (strstr(c[1],"strnstr") && a >= 4)
+	if (strstr(c[1],"strnstr") && a >= 5)
 	{
 		printf("====================\nStrnstr : \n");
 		printf("My strnstr :%s\n", ft_strnstr(s1, s2, (size_t)count));
 		printf("Real One   :%s\n", strnstr(s1, s2, (size_t)count));
 	}
+	Buffinit(0, c[2],c[3],&s1, &s2, NULL, NULL);
+	if (strnstr(c[1], "strlcat") && a >= 5)
+	{
+		printf("====================\nStrlcat : \n");
+		printf("My strlcat :%s\n", ft_strlcat(s1, s2, (size_t)count));
+		printf("Real One   :%s\n", strlcat(s1, s2, (size_t)count));
+	}
+	char *s;
+	if (strnstr(c[1],"strtrim") && a >= 4)
+	{
+		s = ft_strtrim(s1, s2); 
+		printf("====================\nStrtrim : \n");
+		printf("My strtrim :%s\n", s);
+		free(s);
+	}
+	char **p;
+	if (strnstr(c[1], "split") && a >= 4)
+	{
+		p = ft_split(s1, s2);
+		printf("====================\nSplit : \n");
+		int i = 0;
+		while (p[i])
+		{
+			ft_putstr_fd(p[i]);
+			ft_putchar_fd('\n');
+			i++;
+		}
+		free(p);
+	}
+	if (strnstr(c[1], "strjoin") && a >= 4)
+	{
+		printf("====================\nStrjoin : \n");
+		s = ft_strjoin(s1, s2);
+		printf("My strjoin :%s\n");
+		free(s);
+	}
+	if (strnstr(c[1], "substr") && a >= 5)
+	{
+		s = ft_substr(s1 , ft_atoi(s2), count);
+		printf("====================\nSubstr : \nMy substr :");
+		ft_putstr_fd(s);
+		ft_putchar_fd('\n');
+		free(s);
+	}
+
+	/*putnbrfd putendlfd, putstrfd putcharfd*/
+	/*strchr, strrchr, bzero, memset*/
+	/*itoa isalpha isacii isalnum isdigit isprint tolower toupper*/
+	/*striteri, strmapi, */
+	
 	return (0);
 }
+

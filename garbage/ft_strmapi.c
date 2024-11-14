@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 18:02:30 by ayoub             #+#    #+#             */
-/*   Updated: 2024/11/14 14:29:36 by aykrifa          ###   ########.fr       */
+/*   Created: 2024/11/02 14:44:27 by ayoub             #+#    #+#             */
+/*   Updated: 2024/11/09 11:03:00 by aykrifa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isisspace(int c)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	return ((c <= 13 && c >= 9) || c == ' ');
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	r;
-	int	s;
-	int	i;
+	size_t		i;
+	char		*r;
 
 	i = 0;
-	s = 1;
-	r = 0;
-	while (ft_isisspace(nptr[i]))
+	while (s[i])
 		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	r = (char *)malloc(sizeof(char) * (i + 1));
+	if (r == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i])
 	{
-		if (nptr[i] == '-')
-			s = -s;
+		r[i] = f((unsigned int)i, s[i]);
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		r = r * 10 + nptr[i] - '0';
-		i++;
-	}
-	return (s * r);
+	r[i] = 0;
+	return (r);
 }
